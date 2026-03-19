@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Order {
+  id              Int      @id @default(autoincrement())
+  orderId         String   @unique
+  date            DateTime @default(now())
+  productName     String
+  customerName    String
+  customerPhone   String
+  deliveryAddress String
+  geoLocation     String?
+  roseColor       String
+  wrapColor       String
+  cardMessage     String?
+  deliveryDate    String   @default("")
+  deliveryTime    String   @default("")
+  amount          Float
+  status          String   @default("PENDING") // PENDING, PAID, FAILED
+}
+
+model Config {
+  id              Int    @id @default(1)
+  img100          String @default("https://irispetals.com/wp-content/uploads/2025/10/122.webp")
+  img50           String @default("https://irispetals.com/wp-content/uploads/2025/10/39.webp")
+  roseColors      String @default("[\"أحمر كلاسيكي\",\"أبيض ناصع\",\"روز\"]")
+  wrapColors      String @default("[\"أسود فاخر\",\"أبيض ملكي\",\"بيج كلاسيك\"]")
+}

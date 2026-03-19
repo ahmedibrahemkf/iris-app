@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Alexandria', sans-serif;
+    background-color: #ffffff;
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .serif {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .hero-section {
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('https://irispetals.com/wp-content/uploads/2025/11/iris-bg.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+}
