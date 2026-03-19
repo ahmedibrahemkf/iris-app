@@ -30,6 +30,13 @@ export async function POST(request: Request) {
       }
     });
 
+    // Determine base URL dynamically (Local vs Vercel Serverless)
+    const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL 
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` 
+      : process.env.VERCEL_URL 
+        ? `https://${process.env.VERCEL_URL}` 
+        : 'http://localhost:3000';
+
     // OPay API call to create a checkout URL
     const payload = {
       country: "EG",
@@ -38,8 +45,8 @@ export async function POST(request: Request) {
         total: data.amount * 100, // OPay usually accepts amount in minor units (cents/piastras)
         currency: "EGP"
       },
-      returnUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/success`,
-      cancelUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/`,
+      returnUrl: `${baseUrl}/success`,
+      cancelUrl: `${baseUrl}/`,
       expireAt: 30,
       userInfo: {
         userName: data.customerName,
